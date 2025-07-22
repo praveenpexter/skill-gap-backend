@@ -3,12 +3,10 @@ import os
 
 app = Flask(__name__)
 
-# Home route
 @app.route('/')
 def home():
     return "✅ Backend is working! Try /api/profile or /api/gaps"
 
-# Simulated profile data
 @app.route('/api/profile')
 def get_profile():
     return jsonify({
@@ -17,7 +15,6 @@ def get_profile():
         "skills": ["Java", "OOP", "MySQL"]
     })
 
-# Skill gap analysis
 @app.route('/api/gaps')
 def get_gaps():
     current_skills = set(["Java", "OOP", "MySQL"])
@@ -25,7 +22,7 @@ def get_gaps():
     missing_skills = list(required_skills - current_skills)
     return jsonify({"missing_skills": missing_skills})
 
-# Run app
-if __name__ == '__main__':
+# ✅ IMPORTANT: Use PORT and bind to 0.0.0.0
+if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port, debug=True)
